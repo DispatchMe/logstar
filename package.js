@@ -1,7 +1,7 @@
 Package.describe({
   name: 'dispatch:logstar',
   version: '0.0.1',
-  summary: 'Log and alerts'
+  summary: 'Logging for both client and server'
 });
 
 Npm.depends({
