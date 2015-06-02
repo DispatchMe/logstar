@@ -1,6 +1,6 @@
 Package.describe({
   name: 'dispatch:logstar',
-  version: '0.0.1',
+  version: '0.0.2',
   summary: 'Logging for both client and server'
 });
 
@@ -12,7 +12,7 @@ Npm.depends({
 Package.onUse(function (api) {
   api.versionsFrom('1.0');
 
-  api.use(['underscore', 'check']);
+  api.use(['meteor', 'underscore', 'check']);
 
   api.addFiles([
     'client.js'

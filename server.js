@@ -4,26 +4,35 @@ Logstar = {};
 
 var loggly = Npm.require('loggly');
 var colors = Npm.require('colors');
+var logglyClient;
 
 Logstar.isLocal = /:\/\/localhost:/.test(Meteor.absoluteUrl());
 
-var logglyClient;
+Meteor.startup(function() {
 
-if (Meteor.settings.loggly) {
+  if (Logstar.isLocal) {
+    console.warn('[Logstar]'.yellow, 'Running on localhost');
+  }
 
-  // Check that we have a token, subdomain and optional array of tags
-  check(Meteor.settings.loggly.token, String);
-  check(Meteor.settings.loggly.tags, Match.Optional([String]));
-  check(Meteor.settings.loggly.subdomain, String);
+  if (Meteor.settings.loggly) {
 
-  // Create the loggly client
-  logglyClient = loggly.createClient({
-    token: Meteor.settings.loggly.token,
-    tags: Meteor.settings.loggly.tags,
-    subdomain: Meteor.settings.loggly.subdomain
-  });
+    // Check that we have a token, subdomain and optional array of tags
+    check(Meteor.settings.loggly.token, String);
+    check(Meteor.settings.loggly.tags, Match.Optional([String]));
+    check(Meteor.settings.loggly.subdomain, String);
 
-}
+    // Create the loggly client
+    logglyClient = loggly.createClient({
+      token: Meteor.settings.loggly.token,
+      tags: Meteor.settings.loggly.tags,
+      subdomain: Meteor.settings.loggly.subdomain
+    });
+
+    console.log('[Logstar]'.green, 'Connecting to loggly');
+
+  }
+
+});
 
 var _argumentsToString = function(args) {
   var result = [];
@@ -66,7 +75,11 @@ Logstar.addMethod = function(tag, color) {
 
     if (logglyClient && !Logstar.isLocal) {
       // If loggly supported log a message using the tag "log"
-      logglyClient.log(message, [ tag ]);
+      logglyClient.log(message, [ tag ], function(err) {
+        if (err) {
+          console.error('[LOGSTAR]'.red, err);
+        }
+      });
     } else {
       // Print to local console when running on localhost
       if (typeof console[tag] === 'function') {
