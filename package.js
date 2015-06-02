@@ -1,0 +1,26 @@
+Package.describe({
+  name: 'dispatch:logstar',
+  version: '0.0.1',
+  summary: 'Log and alerts'
+});
+
+Npm.depends({
+  'loggly': '1.0.8',
+  'colors': '0.6.2'
+});
+
+Package.onUse(function (api) {
+  api.versionsFrom('1.0');
+
+  api.use(['underscore', 'check']);
+
+  api.addFiles([
+    'client.js'
+  ], 'client');
+
+  api.addFiles([
+    'server.js'
+  ], 'server');
+
+  api.export('Logstar');
+});
