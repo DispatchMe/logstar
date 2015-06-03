@@ -8,31 +8,27 @@ var logglyClient;
 
 Logstar.isLocal = /:\/\/localhost:/.test(Meteor.absoluteUrl());
 
-Meteor.startup(function() {
+if (Logstar.isLocal) {
+  console.info('[Logstar]'.yellow, 'Running on localhost');
+}
 
-  if (Logstar.isLocal) {
-    console.warn('[Logstar]'.yellow, 'Running on localhost');
-  }
+if (Meteor.settings.loggly) {
 
-  if (Meteor.settings.loggly) {
+  // Check that we have a token, subdomain and optional array of tags
+  check(Meteor.settings.loggly.token, String);
+  check(Meteor.settings.loggly.tags, Match.Optional([String]));
+  check(Meteor.settings.loggly.subdomain, String);
 
-    // Check that we have a token, subdomain and optional array of tags
-    check(Meteor.settings.loggly.token, String);
-    check(Meteor.settings.loggly.tags, Match.Optional([String]));
-    check(Meteor.settings.loggly.subdomain, String);
+  // Create the loggly client
+  logglyClient = loggly.createClient({
+    token: Meteor.settings.loggly.token,
+    tags: Meteor.settings.loggly.tags,
+    subdomain: Meteor.settings.loggly.subdomain
+  });
 
-    // Create the loggly client
-    logglyClient = loggly.createClient({
-      token: Meteor.settings.loggly.token,
-      tags: Meteor.settings.loggly.tags,
-      subdomain: Meteor.settings.loggly.subdomain
-    });
+  console.log('[Logstar]'.green, 'Connecting to loggly');
 
-    console.log('[Logstar]'.green, 'Connecting to loggly');
-
-  }
-
-});
+}
 
 var _argumentsToString = function(args) {
   var result = [];
