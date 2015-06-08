@@ -70,8 +70,10 @@ Logstar.addMethod = function(tag, color) {
     var message = _argumentsToString(_.toArray(arguments));
 
     if (logglyClient && !Logstar.isLocal) {
+      // If tag is critical it's implying that its a critical error
+      var tags = (tag === 'critical')? [tag, 'error']:[tag];
       // If loggly supported log a message using the tag "log"
-      logglyClient.log(message, [ tag ], function(err) {
+      logglyClient.log(message, tags, function(err) {
         if (err) {
           console.error('[LOGSTAR]'.red, err);
         }
