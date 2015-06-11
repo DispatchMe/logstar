@@ -75,7 +75,16 @@ Logstar.addMethod = function(tag, color) {
       // If loggly supported log a message using the tag "log"
       logglyClient.log(message, tags, function(err) {
         if (err) {
-          console.error('[LOGSTAR]'.red, err);
+          console.error('[LOGSTAR-CLIENT]'.red, err);
+
+          // Print to local console when running on localhost
+          if (typeof console[tag] === 'function') {
+            // Use the supported console log tag
+            console[tag](color('[LOGSTAR]'), message);
+          } else {
+            // If tag is not supported then use regular log
+            console.log(color('[LOGSTAR]'), message);
+          }
         }
       });
     } else {

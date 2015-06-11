@@ -1,6 +1,6 @@
 base64@1.0.3
 check@1.0.5
-dispatch:logstar@0.0.4
+dispatch:logstar@0.0.5
 ejson@1.0.6
 json@1.0.3
 meteor@1.1.6

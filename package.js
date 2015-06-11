@@ -1,6 +1,6 @@
 Package.describe({
   name: 'dispatch:logstar',
-  version: '0.0.4',
+  version: '0.0.5',
   summary: 'Logging for both client and server'
 });
 
