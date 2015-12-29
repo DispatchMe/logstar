@@ -34,7 +34,7 @@ Example:
 #### Configuration
 *`ENV VARIABLES`*
 ```
-CONSOLE_LEVEL="debug" # Defaults to info -- if you set this to "false" it will disable console logging (server only)
+CONSOLE_LEVEL="debug" # Defaults to info. If you set this to "false" it will disable console logging (server only)
 LOGGLY_LEVEL="debug" # Defaults to info
 LOGGLY_SUBDOMAIN="mysubdomain"
 LOGGLY_TAGS="api-server,production"
