@@ -16,14 +16,18 @@ It uses winston on the server and `console.log` on the client. It supports multi
 * `Logstar.warn`: Prioritize taking action.
 * `Logstar.error`: Take action soon.
 * `Logstar.fatal`: Take action IMMEDIATELY!!!!
+* [SERVER] `Logstar.tags`: Include these tags.
 * [SERVER] `Logstar.winstonInstance`
 
 Example:
 ```js
-  import { debug, info, fatal } from 'logstar';
+  import { debug, info, fatal, tags } from 'logstar';
+  tags('system', 'integration');
   debug('My mood', ['need', 'more', 'coffee']);
   info({ temperature: -10 });
   fatal('Sound the alarms', { weather: 'hail' }, new Error('Too cold'));
+  info('more', 'logs');
+  tags();
 ```
 
 ```js
