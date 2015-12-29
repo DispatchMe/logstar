@@ -1,7 +1,11 @@
-dispatch:logstar
+logstar
 ================
 
-Simple, opinionated, isomorphic logging. 
+[![Travis Status][https://api.travis-ci.org/DispatchMe/logstar.svg]][https://travis-ci.org/DispatchMe/logstar]
+[![devDependency Status](https://david-dm.org/dispatchme/logstar/dev-status.svg)](https://david-dm.org/dispatchme/logstar)
+[![Dependency Status](https://david-dm.org/dispatchme/logstar.svg)](https://david-dm.org/dispatchme/logstar)
+
+> Simple, opinionated, isomorphic logging.
 
 It uses winston on the server and `console.log` on the client. It supports multiple arguments. If you have LOGGLY environment variables set, it will auto-configure the winston loggly transport.
 
