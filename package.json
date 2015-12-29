@@ -1,6 +1,6 @@
 {
   "name": "logstar",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple, opinionated, isomorphic logging.",
   "main": "dist/logger.js",
   "files": ["dist"],
