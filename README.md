@@ -1,7 +1,7 @@
 logstar
 ================
 
-[![Travis Status][https://api.travis-ci.org/DispatchMe/logstar.svg]](https://travis-ci.org/DispatchMe/logstar)
+[![Travis Status](https://api.travis-ci.org/DispatchMe/logstar.svg)](https://travis-ci.org/DispatchMe/logstar)
 [![devDependency Status](https://david-dm.org/dispatchme/logstar/dev-status.svg)](https://david-dm.org/dispatchme/logstar)
 [![Dependency Status](https://david-dm.org/dispatchme/logstar.svg)](https://david-dm.org/dispatchme/logstar)
 
