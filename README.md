@@ -16,6 +16,7 @@ It uses winston on the server and `console.log` on the client. It supports multi
 * `Logstar.warn`: Prioritize taking action.
 * `Logstar.error`: Take action soon.
 * `Logstar.fatal`: Take action IMMEDIATELY!!!!
+* [SERVER] `Logstar.winstonInstance`
 
 Example:
 ```js
