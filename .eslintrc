@@ -5,6 +5,11 @@
     "mocha": true
   },
   "globals": {
-    "expect": true
+    "expect": false
+  },
+  "rules": {
+    "no-unused-expressions": 1,
+    "no-use-before-define": [2, "nofunc"],
+    "no-console": 0
   }
 }

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4
+
+- Join the manually set tags with the process tags, instead of overriding them.
+
 ## 1.0.0
 
 - Change project to a pure **node** package and host on npm
