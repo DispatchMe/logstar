@@ -1,8 +1,8 @@
 {
   "name": "logstar",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "description": "Simple, opinionated, isomorphic logging.",
-  "main": "dist/logger.js",
+  "main": "dist/index.js",
   "files": ["dist"],
   "repository": {
     "type": "git",
@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "babel --presets 'es2015' --ignore __tests__ lib --out-dir dist",
+    "build": "rm -rf dist && babel --presets 'es2015' --ignore *.tests.js lib --out-dir dist",
     "lint": "eslint . --ext .js",
     "jscs": "jscs .",
     "lint:fix": "npm run lint -- --fix || true",
