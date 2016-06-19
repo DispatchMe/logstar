@@ -9,37 +9,68 @@ logstar
 
 It uses winston on the server and `console.log` on the client. It supports multiple arguments. If you have LOGGLY environment variables set, it will auto-configure the winston loggly transport.
 
-#### API
+## Usage
+```javascript
+import * as Logstar from 'logstar';
 
-* `Logstar.debug`
-* `Logstar.info`
-* `Logstar.warn`: Prioritize taking action.
-* `Logstar.error`: Take action soon.
-* `Logstar.fatal`: Take action IMMEDIATELY!!!!
-* [SERVER] `Logstar.tags`: Include these tags.
-* [SERVER] `Logstar.winstonInstance`
-
-Example:
-```js
-  import { debug, info, fatal, tags } from 'logstar';
-  tags('system', 'integration');
-  debug('My mood', ['need', 'more', 'coffee']);
-  info({ temperature: -10 });
-  fatal('Sound the alarms', { weather: 'hail' }, new Error('Too cold'));
-  info('more', 'logs');
-  tags();
+Logstar.debug('foo');
+Logstar.info('bar');
+Logstar.fatal('error', new Error('error'));
 ```
 
-```js
-  import * as Logstar from 'logstar';
-  Logstar.info('Hello', 12, { foo: 'bar' }, [1, 2, 3], new Error('Hello'));
+## API
+
+### `class Logger`
+```javascript
+import { Logger } from 'logstar';
 ```
 
-#### Configuration
+#### `constructor(options = {})`
+Configure loggly here. Optionally provide `meta` to be attached to each log request.
+
+```javascript
+{
+  logLevel: 'info',
+  loggly: {
+    token: '',
+    subdomain: '',
+    tags: '',
+  },
+  meta: {}
+}
+```
+#### `debug(...args)`
+#### `debugf(format, ...args)`
+#### `info(...args)`
+#### `infof(format, ...args)`
+#### `warn(...args)`
+#### `warnf(format, ...args)`
+#### `error(...args)`
+#### `errorf(format, ...args)`
+#### `fatal(...args)`
+#### `fatalf(format, ...args)`
+
+### `transactionLogger`
+Get a logger that adds a `transaction_id` property to the meta. Useful for tracking related requests.
+
+```javascript
+import { transactionLogger } from 'logstar';
+const myLogger = transactionLogger('TRANSACTION-ID');
+```
+
+### `default`
+Logger pre-configured with loggly parameters from environment variables. (See below)
+
+```javascript
+import Logstar from 'logstar';
+
+Logstar.info('Hello', 12, { foo: 'bar' }, [1, 2, 3], new Error('Hello'));
+```
+
+## Configuration
 *`ENV VARIABLES`*
 ```
-CONSOLE_LEVEL="debug" # Defaults to info. If you set this to "false" it will disable console logging (server only)
-LOGGLY_LEVEL="debug" # Defaults to info
+LOG_LEVEL="debug" # Defaults to info
 LOGGLY_SUBDOMAIN="mysubdomain"
 LOGGLY_TAGS="api-server,production"
 LOGGLY_TOKEN="secret-loggly-token-here"

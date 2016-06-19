@@ -11,11 +11,14 @@
   "license": "MIT",
   "scripts": {
     "build": "babel --presets 'es2015' --ignore __tests__ lib --out-dir dist",
-    "lint": "eslint ./lib",
-    "prepublish": "rm -rf dist/** && npm run build",
-    "test": "npm run lint && npm run test:unit",
-    "test:unit": "mocha --require mocha.conf.js lib/**/*-test.js",
-    "test:watch": "npm run test:unit -- --watch"
+    "lint": "eslint . --ext .js",
+    "jscs": "jscs .",
+    "lint:fix": "npm run lint -- --fix || true",
+    "jscs:fix": "jscs . --fix || true",
+    "cover": "npm run lint && babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha lib/**/*.tests.js",
+    "mocha": "node_modules/mocha/bin/_mocha --compilers js:babel-core/register --recursive 'lib/**/*.tests.js'",
+    "test": "npm run lint && npm run mocha",
+    "test:watch": "npm run mocha -- --watch"
   },
   "keywords": [
     "autoconfigure",
@@ -39,6 +42,7 @@
     "babel-core": "6.x.x",
     "babel-eslint": "4.x.x",
     "babel-preset-es2015": "6.x.x",
+    "babel-preset-stage-0": "^6.5.0",
     "eslint": "1.9.x",
     "eslint-config-airbnb": "1.0.0",
     "expect": "1.13.x",
