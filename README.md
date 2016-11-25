@@ -26,7 +26,7 @@ import { Logger } from 'logstar';
 ```
 
 #### `constructor(options = {})`
-Configure loggly here. Optionally provide `meta` to be attached to each log request.
+Configure loggly here. Optionally provide a `globalMeta` object to be attached to each log request.
 
 ```javascript
 {
@@ -36,9 +36,15 @@ Configure loggly here. Optionally provide `meta` to be attached to each log requ
     subdomain: '',
     tags: '',
   },
-  meta: {}
+  globalMeta: {}
 }
 ```
+
+#### For JSON-logging, the following rules apply:
+1. If there are exactly 2 arguments passed to the log function, and the second argument is an object, then that object is used as the `meta` parameter, and the first argument is used as the log message.
+2. If there is exactly 1 argument passed to the log function, and that argument is an object, then that object is used as the `meta` parameter, with an empty log message.
+3. In all other cases, the first argument is used as the log message, and the subsequent arguments are added as the `context` property on the `meta` object.
+
 #### `debug(...args)`
 #### `debugf(format, ...args)`
 #### `info(...args)`
@@ -65,6 +71,9 @@ Logger pre-configured with loggly parameters from environment variables. (See be
 import Logstar from 'logstar';
 
 Logstar.info('Hello', 12, { foo: 'bar' }, [1, 2, 3], new Error('Hello'));
+
+// This will end up as:
+{"level": "info", "message": "Hello", "context": [12, {"foo": "bar"}, [1, 2, 3], "Hello"]}
 ```
 
 ## Configuration
