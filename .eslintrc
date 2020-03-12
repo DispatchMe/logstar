@@ -1,15 +1,17 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb/base",
+  "extends": "airbnb-base",
   "env": {
     "mocha": true
   },
   "globals": {
-    "expect": false
+    "expect": false,
+    "window": true
   },
   "rules": {
     "no-unused-expressions": 1,
     "no-use-before-define": [2, "nofunc"],
-    "no-console": 0
+    "no-console": 0,
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.tests.js"]}]
   }
 }
