@@ -17,7 +17,7 @@
     "jscs": "jscs .",
     "lint:fix": "npm run lint -- --fix || true",
     "jscs:fix": "jscs . --fix || true",
-    "cover": "npm run lint && babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha lib/**/*.tests.js",
+    "cover": "nyc npm run mocha",
     "mocha": "node_modules/mocha/bin/_mocha --require @babel/register --recursive 'lib/**/*.tests.js'",
     "test": "npm run lint && npm run mocha",
     "test:watch": "npm run mocha -- --watch",
@@ -67,6 +67,7 @@
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "^2.20.2",
     "expect": "1.13.x",
-    "mocha": "^7.1.1"
+    "mocha": "^7.1.1",
+    "nyc": "^15.0.1"
   }
 }
