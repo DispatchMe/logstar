@@ -21,7 +21,7 @@
     "mocha": "node_modules/mocha/bin/_mocha --require @babel/register --recursive 'lib/**/*.tests.js'",
     "test": "npm run lint && npm run mocha",
     "test:watch": "npm run mocha -- --watch",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "autoconfigure",
