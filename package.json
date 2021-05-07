@@ -36,7 +36,7 @@
     "winston-loggly": false
   },
   "dependencies": {
-    "underscore": "^1.10.2",
+    "underscore": "^1.12.1",
     "util": "^0.12.2",
     "winston": "^3.2.1",
     "winston-loggly-bulk": "^3.1.0"
